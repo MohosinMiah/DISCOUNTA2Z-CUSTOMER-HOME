@@ -94,7 +94,8 @@ Route::group(['prefix'=>'admins','as'=>'admin.'], function(){
     
     Route::post('/settings/change_phone', ['as' => 'admin_change_phone', 'uses' => 'AdminController@change_phone'])->name('admin_change_phone');
 
-    
+    Route::get('/logout', ['as' => 'admin_logout', 'uses' => 'AdminController@logout'])->name('admin_logout');
+
 
 
 
@@ -157,6 +158,19 @@ Route::group(['prefix'=>'sellers','as'=>'seller.'], function(){
     Route::get('/customer/view/{id}', ['as' => 'customer_view', 'uses' => 'SellerController@show'])->name('seller_seller_show');
     
     Route::get('/customer/delete/{id}', ['as' => 'customer_destroy', 'uses' => 'SellerController@destroy'])->name('seller_seller_destroy');
+
+
+    // Seller  Settings Route    **********************
+
+    Route::get('/settings', ['as' => 'seller_settings', 'uses' => 'SellerController@seller_settings'])->name('seller_settings');
+    
+    Route::post('/settings/info', ['as' => 'seller_info', 'uses' => 'SellerController@info'])->name('seller_settings_info');
+
+    Route::post('/settings/change_pass', ['as' => 'seller_change_pass', 'uses' => 'SellerController@change_pass'])->name('seller_change_pass');
+    
+    Route::post('/settings/change_phone', ['as' => 'seller_change_phone', 'uses' => 'SellerController@change_phone'])->name('seller_change_phone');
+
+    Route::get('/logout', ['as' => 'seller_logout', 'uses' => 'SellerController@logout'])->name('seller_logout');
 
 
 

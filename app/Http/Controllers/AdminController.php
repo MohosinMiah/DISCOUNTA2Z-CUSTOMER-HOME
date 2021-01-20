@@ -131,17 +131,16 @@ class AdminController extends Controller
     public function dashboard(){
 
 
-        // Check Admin Acess 
+      
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
 
-       if(Session::get('admin_is_login')){
 
         return view('dashboard.main.main');
 
-       }else{
-
-        return redirect()->route('admin.loginadmin_login');
-
-       }
+      
 
 
 
@@ -384,6 +383,15 @@ class AdminController extends Controller
 
     public function new_password(Request $request) {
 
+  
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
+
+            
+
 
         // Stored Session Phone and OTP
 
@@ -445,6 +453,8 @@ class AdminController extends Controller
             //  echo "Update Successfully";
             // die;
 
+
+            
           }else{
          
             
@@ -460,6 +470,8 @@ class AdminController extends Controller
         }
 
              }
+
+
 
     }
 
@@ -482,7 +494,17 @@ class AdminController extends Controller
      */
     public function create()
     {
+
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
         return view('admin.users.create');
+
+         
+
+
     }
 
 
@@ -559,6 +581,12 @@ class AdminController extends Controller
 
 
     public function all(){
+        
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
 
         $sellers = Seller::orderBy('created_at', 'desc')->get();
 
@@ -578,6 +606,14 @@ class AdminController extends Controller
      */
     public function edit($seller_id)
     {
+
+        
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
+
         $seller = Seller::where('id',$seller_id)->first();
         return view('admin.users.update',compact('seller'));
     }
@@ -593,6 +629,13 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
         
           // Data Validation
 
@@ -664,6 +707,14 @@ class AdminController extends Controller
     public function show($seller_id)
     {
 
+        
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
+
+
         $seller = Seller::where('id',$seller_id)->first();
 
         return view('admin.users.show',compact('seller'));
@@ -681,6 +732,12 @@ class AdminController extends Controller
 
     public function destroy($seller_id)
     {
+        
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
 
         $seller = Seller::where('id',$seller_id)->delete();
 
@@ -716,7 +773,38 @@ class AdminController extends Controller
  */
 
 
+ public function logout(){
+
+
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
+        // Store Admin Info Adter Successfully Login
+
+        Session::forget('admin_id');
+
+        Session::forget('admin_name');
+
+        Session::forget('admin_phone');
+        
+        Session::forget('admin_is_login');
+
+        Session::flush();
+
+        return redirect()->route('admin.loginadmin_login');
+
+     
+ }
+
  public function admin_settings(){
+     
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
 
     $admin_id = Session::get('admin_id');
 
@@ -738,6 +826,14 @@ class AdminController extends Controller
 
 
 public function info(Request $request){
+
+    
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
+
         // Data Validation
 
         $validatedData = Validator::make($request->all(), [
@@ -799,6 +895,13 @@ public function info(Request $request){
 
 
 public function change_pass(Request $request){
+
+    
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
     // Data Validation
 
     $validatedData = Validator::make($request->all(), [
@@ -882,6 +985,14 @@ public function change_pass(Request $request){
 
 
 public function change_phone(Request $request){
+
+    
+         // Admin Login Check 
+         if(!Session::get('admin_is_login')){   
+            return redirect()->route('admin.loginadmin_login');
+         }
+
+         
     // Data Validation
 
     $validatedData = Validator::make($request->all(), [

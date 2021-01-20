@@ -10,7 +10,15 @@
 <div class="container">
   <div class="row ">
     <div class="col-md-2"></div>
+ {{-- Display Error Message  --}}
+ <div class="row">
+  <div class="col-md-12">
 
+     {{-- Display Error Message  --}}
+    @include('seller.error.error')
+  
+  </div>
+</div>
     <div class="col-md-8 center_div">
       <form class="form-horizontal border_class" method="POST" action="{{ route('seller.loginseller_login_post' ) }}">
           @csrf

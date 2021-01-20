@@ -44,11 +44,15 @@ class SellerController extends Controller
     public function login_post(Request $request){
 
 
+        
+
         // Data Validation
 
         $validatedData =Validator::make($request->all(), [
+
             'phone' => ['required'],
             'password' => ['required'],
+
         ]);
 
         // Store Data In Valriables
@@ -60,15 +64,30 @@ class SellerController extends Controller
         // Check Data Validation
 
         if ($validatedData->fails()) {
-            // dd($validatedData);
+            dd($validatedData);
 
             return redirect()->back()->withErrors($validatedData)->withInput();;  // Redirect Back With Errors
 
         }else{
 
-            $seller =  DB::table('customers')->where(['phone'=> $phone,'password'=> $password ])->first();
+
+            $seller =  DB::table('sellers')->where(['phone'=> $phone,'password'=> $password ])->first();
+
+
+
             // Check seller Login Success Or Fail
             if($seller){
+
+                 // Store Admin Info Adter Successfully Login
+
+                Session::put('seller_id', $seller->id);
+
+                Session::put('seller_name', $seller->name);
+
+                Session::put('seller_phone', $seller->phone);
+                
+                Session::put('seller_is_login', true);
+
 
                 return redirect()->route('seller.dashboardseller_dashboard');
 
@@ -103,6 +122,8 @@ class SellerController extends Controller
      */
 
     public function dashboard(){
+
+
 
         return view('dashboard.main.main');
 
@@ -482,7 +503,8 @@ class SellerController extends Controller
 
                     $address = $request->address;
 
-                    $seller_id = 1;
+                    $seller_id = Session::get('seller_id');
+
 
     // Check Data Validation
 
@@ -574,7 +596,8 @@ class SellerController extends Controller
 
                 $address = $request->address;
 
-                $seller_id = 1;
+                $seller_id = Session::get('seller_id');
+
 
     // Check Data Validation
 
@@ -675,15 +698,15 @@ class SellerController extends Controller
 
  public function seller_settings(){
 
-    $customer_id = 1;
+    $seller_id = Session::get('seller_id');
 
-    $seller = seller::where('id',$customer_id)->first();
+    $seller = Seller::where('id',$seller_id)->first();
 
     $data = [
         'seller'  => $seller,
     ];
      
-    return view('seller.dashboard.setting.setting')->with('data',$data);
+    return view('seller.setting.setting')->with('data',$data);
  }
     
 
@@ -699,7 +722,6 @@ public function info(Request $request){
 
         $validatedData = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
             'address' => 'required',
         ]);
 
@@ -707,11 +729,10 @@ public function info(Request $request){
 
         $name = $request->name;
 
-        $email = $request->email;
 
         $address = $request->address;
 
-        $customer_id = 1;
+        $seller_id = Session::get('seller_id');
 
         // Check Data Validation
 
@@ -723,12 +744,11 @@ public function info(Request $request){
 
         }else{
 
-            $seller =  DB::table('customers')
-            ->where('id',$customer_id)
+            $seller =  DB::table('sellers')
+            ->where('id',$seller_id)
             ->update(
                 [
                     'name'=> $name,
-                    'email'=> $email,
                     'address'=> $address,
                     'updated_at' => Carbon::now(),
                 ]
@@ -773,7 +793,7 @@ public function change_pass(Request $request){
 
     $password = $request->password;
 
-    $customer_id = 1;
+    $seller_id = Session::get('seller_id');
     // Hashing Password
     $password = md5($password);
     $old_password = md5($old_password);
@@ -793,7 +813,7 @@ public function change_pass(Request $request){
 
       // Check Old Password
 
-      $seller_password = DB::table('customers')->where('password',$old_password)->first();
+      $seller_password = DB::table('sellers')->where('password',$old_password)->first();
 
       if($seller_password == null){
               // If Old Password Does not Match
@@ -803,11 +823,10 @@ public function change_pass(Request $request){
 
        if($seller_password->password == $old_password ){
      
-        $seller =  DB::table('customers')
-        ->where('id',$customer_id)
+        $seller =  DB::table('sellers')
+        ->where('id',$seller_id)
         ->update(
             [
-                'id'=> $customer_id,
                 'password'=> $password,
                 'updated_at' => Carbon::now(),
             ]
@@ -849,7 +868,7 @@ public function change_phone(Request $request){
 
     $phone = $request->phone;
 
-    $customer_id = 1;
+    $seller_id = Session::get('seller_id');
 
     // Check Data Validation
 
@@ -861,8 +880,8 @@ public function change_phone(Request $request){
 
     }else{
 
-        $is_phone =  DB::table('customers')
-        ->where('id',$customer_id)
+        $is_phone =  DB::table('sellers')
+        ->where('id',$seller_id)
         ->update(
             [
                 'phone'=> $phone,
@@ -882,6 +901,33 @@ public function change_phone(Request $request){
 }
 
 
+
+
+
+public function logout(){
+
+
+    // Admin Login Check 
+    if(!Session::get('seller_is_login')){   
+       return redirect()->route('seller.loginseller_login');
+    }
+
+   // Store Admin Info Adter Successfully Login
+
+   Session::forget('seller_id');
+
+   Session::forget('seller_name');
+
+   Session::forget('seller_phone');
+   
+   Session::forget('seller_is_login');
+
+   Session::flush();
+
+   return redirect()->route('admin.loginadmin_login');
+
+
+}
 
 
 

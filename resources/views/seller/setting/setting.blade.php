@@ -26,7 +26,7 @@
             <div class="col-md-12">
         
                {{-- Display Error Message  --}}
-              @include('admin.error.error')
+              @include('seller.error.error')
             
             </div>
           </div>
@@ -41,23 +41,19 @@
             <div class="card">
                 <div class="card-body">
                    
-            <form method="POST" action="{{ route('admin.admin_infoadmin_settings_info')}}">
+            <form method="POST" action="{{ route('seller.seller_infoseller_settings_info')}}">
                 @csrf
                 <div class="form-group">
                     <label for="name"> Name *</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ $data['admin']->name}}" required>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $data['seller']->name}}" required>
                 </div>
 
 
-                  <div class="form-group">
-                    <label for="email">Email  </label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ $data['admin']->email}}" >
-                  </div>
-
+       
 
                   <div class="form-group">
                     <label for="address">Address * </label>
-                    <textarea name="address"  class="form-control"  id="address" cols="40" rows="5"> {{ $data['admin']->address}} </textarea>
+                    <textarea name="address"  class="form-control"  id="address" cols="40" rows="5"> {{ $data['seller']->address}} </textarea>
                 </div>
 
             
@@ -94,12 +90,12 @@
         <div class="card">
             <div class="card-body">
                
-        <form method="POST" action="{{ route('admin.admin_change_phoneadmin_change_phone')}}">
+        <form method="POST" action="{{ route('seller.seller_change_phoneseller_change_phone')}}">
             @csrf
          
             <div class="form-group">
                 <label for="phone">Phone Number *</label>
-                <input type="text" pattern=".{11}" class="form-control" id="phone" name="phone" value="{{ $data['admin']->phone}}" oninput="check(this)"  required>
+                <input type="text" pattern=".{11}" class="form-control" id="phone" name="phone" value="{{ $data['seller']->phone}}" oninput="check(this)"  required>
             </div>
 
             <button type="submit" class="btn btn-success">CHANGE PHONE NUMBER</button>
@@ -132,7 +128,7 @@
         <div class="card">
             <div class="card-body">
                
-        <form method="POST" action="{{ route('admin.admin_change_passadmin_change_pass')}}">
+        <form method="POST" action="{{ route('seller.seller_change_passseller_change_pass')}}">
             @csrf
             <div class="form-group">
                 <label for="old_password"> Old Password *</label>
