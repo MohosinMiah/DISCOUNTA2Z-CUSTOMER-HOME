@@ -36,8 +36,8 @@
               <thead>
                   <tr>
                       <th>ID</th>
-                      <th>Name</th>
-                      <th>Area Code</th>
+                      <th class="column_name">Name</th>
+                      <th class="column _name">Area Code</th>
                       <th>Phone</th>
                       <th>Email </th>
                       <th> Action </th>
