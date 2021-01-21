@@ -6,7 +6,19 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
+
+                {{--  Admin Name   --}}
+                @if(Session::get('admin_is_login'))
                 <div class="sidebar-brand-text mx-3"> {{  Session::get('admin_name') }}</div>
+                @endif
+
+                {{--  Seller Name   --}}
+                @if(Session::get('seller_is_login'))
+                <div class="sidebar-brand-text mx-3"> {{  Session::get('seller_name') }}</div>
+                @endif
+
+
+
             </a>
 
             <!-- Divider -->
