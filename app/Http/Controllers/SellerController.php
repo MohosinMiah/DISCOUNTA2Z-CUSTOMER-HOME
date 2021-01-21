@@ -123,9 +123,16 @@ class SellerController extends Controller
 
     public function dashboard(){
 
+            // Seller Login Check 
+            if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+                return redirect()->route('home');
+             }
+             
+             $customers = Customer::orderBy('created_at', 'desc')->get();
+    
 
 
-        return view('dashboard.main.main');
+        return view('dashboard.main.main',compact('customers'));
 
 
     }
@@ -369,6 +376,7 @@ class SellerController extends Controller
 
     public function new_password(Request $request) {
 
+     
 
         // Stored Session Phone and OTP
 
@@ -467,6 +475,14 @@ class SellerController extends Controller
      */
     public function create()
     {
+    
+        // Seller Login Check 
+        if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+        return redirect()->route('home');
+        }
+        
+
+
         return view('seller.customers.create');
     }
 
@@ -543,6 +559,13 @@ class SellerController extends Controller
 
     public function all(){
 
+        // Seller Login Check 
+        if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+            return redirect()->route('home');
+         }
+    
+
+
         $customers = Customer::orderBy('created_at', 'desc')->get();
 
    
@@ -561,6 +584,14 @@ class SellerController extends Controller
      */
     public function edit($customer_id)
     {
+
+        // Seller Login Check 
+        if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+            return redirect()->route('home');
+         }
+    
+
+
         $customer = Customer::where('id',$customer_id)->first();
         return view('seller.customers.update',compact('customer'));
     }
@@ -576,6 +607,14 @@ class SellerController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // Seller Login Check 
+        if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+            return redirect()->route('home');
+         }
+    
+
+
         // Data Validation
 
         $validatedData = Validator::make($request->all(), [
@@ -643,6 +682,13 @@ class SellerController extends Controller
      */
     public function show($customer_id)
     {
+            
+        // Seller Login Check 
+        if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+            return redirect()->route('home');
+         }
+    
+
 
         $customer = Customer::where('id',$customer_id)->first();
 
@@ -661,6 +707,14 @@ class SellerController extends Controller
 
     public function destroy($customer_id)
     {
+
+        // Seller Login Check 
+        if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+            return redirect()->route('home');
+            }
+            
+        
+
 
         $customer = Customer::where('id',$customer_id)->delete();
 
@@ -698,6 +752,12 @@ class SellerController extends Controller
 
  public function seller_settings(){
 
+        // Seller Login Check 
+        if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+            return redirect()->route('home');
+         }
+    
+
     $seller_id = Session::get('seller_id');
 
     $seller = Seller::where('id',$seller_id)->first();
@@ -718,6 +778,14 @@ class SellerController extends Controller
 
 
 public function info(Request $request){
+
+
+        // Seller Login Check 
+        if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+            return redirect()->route('home');
+         }
+    
+         
         // Data Validation
 
         $validatedData = Validator::make($request->all(), [
@@ -776,6 +844,17 @@ public function info(Request $request){
 
 
 public function change_pass(Request $request){
+
+
+        // Seller Login Check 
+        if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+            return redirect()->route('home');
+         }
+    
+
+
+         
+
     // Data Validation
 
     $validatedData = Validator::make($request->all(), [
@@ -858,6 +937,15 @@ public function change_pass(Request $request){
 
 
 public function change_phone(Request $request){
+
+
+    // Seller Login Check 
+    if(!Session::get('seller_is_login') && !Session::get('admin_is_login')){   
+        return redirect()->route('home');
+        }
+    
+
+
     // Data Validation
 
     $validatedData = Validator::make($request->all(), [
@@ -907,10 +995,10 @@ public function change_phone(Request $request){
 public function logout(){
 
 
-    // Admin Login Check 
-    if(!Session::get('seller_is_login')){   
-       return redirect()->route('seller.loginseller_login');
-    }
+    // // Seller Login Check 
+    // if(!Session::get('seller_is_login')){   
+    //    return redirect()->route('seller.loginseller_login');
+    // }
 
    // Store Admin Info Adter Successfully Login
 

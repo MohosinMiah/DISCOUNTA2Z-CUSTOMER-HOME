@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use App\Seller;
+use App\Customer;
 use Illuminate\Http\Request;
 use Validator;
 use Session;
@@ -137,8 +138,10 @@ class AdminController extends Controller
             return redirect()->route('admin.loginadmin_login');
          }
 
+         $customers = Customer::orderBy('created_at', 'desc')->get();
 
-        return view('dashboard.main.main');
+
+        return view('dashboard.main.main',compact('customers'));
 
       
 

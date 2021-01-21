@@ -71,7 +71,7 @@
 
                     @if(Session::get('seller_name')) 
 
-                    <a class="dropdown-item" href="{{ route('admin.admin_logoutadmin_logout') }}">
+                    <a class="dropdown-item" href="{{ route('seller.seller_logoutseller_logout') }}">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>

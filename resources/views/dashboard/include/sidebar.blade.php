@@ -14,9 +14,30 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
+
+                @if(Session::get('admin_is_login'))
+
                 <a class="nav-link" href="{{ route('admin.dashboardadmin_dashboard') }}">
+            
+                @endif
+
+                @if(Session::get('seller_is_login'))
+
+                <a class="nav-link" href="{{ route('seller.dashboardseller_dashboard') }}">
+            
+                @endif
+
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>{{  Session::get('admin_phone') }}</span></a>
+
+                @if(Session::get('admin_is_login'))
+                <span>{{  Session::get('admin_phone') }}</span>
+                @endif
+
+                @if(Session::get('seller_is_login'))
+                <span>{{  Session::get('seller_phone') }}</span>
+                @endif
+                
+                </a>
             </li>
 
           
@@ -58,6 +79,10 @@
                 </div>
             </li>
 
+            {{--  Admin Setting   --}}
+
+            @if(Session::get('admin_is_login')) 
+
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.admin_settingsadmin_settings') }}">
@@ -65,5 +90,21 @@
                     <span>Settings</span></a>
             </li>
 
+            @endif
+
+            {{--  Seller Setting   --}}
+
+            @if(Session::get('seller_is_login')) 
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('seller.seller_settingsseller_settings') }}">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Settings</span></a>
+            </li>
+
+            @endif
+
+           
         </ul>
         <!-- End of Sidebar -->
