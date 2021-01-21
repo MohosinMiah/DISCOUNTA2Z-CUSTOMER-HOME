@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2021 at 02:56 AM
+-- Generation Time: Jan 21, 2021 at 02:58 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -65,6 +65,13 @@ CREATE TABLE `customers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `card_number`, `name`, `phone`, `gender`, `otp`, `address`, `seller_id`, `created_at`, `updated_at`) VALUES
+(2, 34535435, 'ete', '01857126452', 'Male', NULL, 'House-39,Shataish', 3, '2021-01-20 19:43:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -142,9 +149,9 @@ CREATE TABLE `sellers` (
 --
 
 INSERT INTO `sellers` (`id`, `name`, `area_code`, `phone`, `otp`, `email`, `password`, `address`, `admin_id`, `created_at`, `updated_at`) VALUES
-(1, 'Demoa2z', '1857', '126452', NULL, 'test@gmail.com', '202cb962ac59075b964b07152d234b70', 'House-39,Shataish', 1, '2021-01-17 04:03:10', '2021-01-17 04:03:19'),
+(1, 'Demoa2z', '1857', '126452', NULL, 'test@gmail.com', '202cb962ac59075b964b07152d234b70', 'House-39,Shataish', 1, '2021-01-17 04:03:10', '2021-01-20 19:31:05'),
 (2, 'Demoa2z', '1857', '126451111', NULL, '01857126452@gmail.com', '202cb962ac59075b964b07152d234b70', 'House-39,Shataish', 1, '2021-01-18 12:39:59', NULL),
-(3, 'Demoa2z', '1857', '01587454885', NULL, NULL, '9b04d152845ec0a378394003c96da594', 'House-39,Shataish', 1, '2021-01-18 12:42:36', NULL);
+(3, 'Demoa2z 33', '1857', '01857126452', NULL, NULL, '698d51a19d8a121ce581499d7b701668', 'House-39,Shataish', 1, '2021-01-18 12:42:36', '2021-01-20 12:31:06');
 
 -- --------------------------------------------------------
 
@@ -224,7 +231,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
