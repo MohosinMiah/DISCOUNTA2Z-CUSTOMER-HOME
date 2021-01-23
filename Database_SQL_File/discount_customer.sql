@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2021 at 09:46 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Jan 23, 2021 at 03:39 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -44,7 +45,21 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `phone`, `otp`, `email`, `password`, `address`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', '01857126452', '4773', 'hamza1610330816@gmail.com', '202cb962ac59075b964b07152d234b70', 'Uttara , Sector - 10, Road -10, House - 10', '2021-01-07 05:13:45', '2021-01-12 21:48:38');
+(1, 'Admin', '01857126452', NULL, 'hamza1610330816@gmail.com', '202cb962ac59075b964b07152d234b70', 'Uttara, Dhaka', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `cart_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `added_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -54,9 +69,23 @@ INSERT INTO `admins` (`id`, `name`, `phone`, `otp`, `email`, `password`, `addres
 
 CREATE TABLE `customers` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `card_number` bigint(20) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `otp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `seller_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `card_number`, `name`, `phone`, `gender`, `otp`, `address`, `seller_id`, `created_at`, `updated_at`) VALUES
+(3, 123123123, 'Demoa2z', '01857126452', 'Male', NULL, 'House-39,Shataish', 3, '2021-01-22 11:56:42', '2021-01-22 20:28:13');
 
 -- --------------------------------------------------------
 
@@ -90,12 +119,13 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2021_01_06_053142_create_customers_table', 1),
-(5, '2021_01_06_053242_create_sellers_table', 1),
-(6, '2021_01_06_093437_create_admins_table', 1);
+(7, '2014_10_12_000000_create_users_table', 1),
+(8, '2014_10_12_100000_create_password_resets_table', 1),
+(9, '2019_08_19_000000_create_failed_jobs_table', 1),
+(10, '2021_01_06_053142_create_customers_table', 1),
+(11, '2021_01_06_053242_create_sellers_table', 1),
+(12, '2021_01_06_093437_create_admins_table', 1),
+(14, '2021_01_23_023817_create_carts_table', 2);
 
 -- --------------------------------------------------------
 
@@ -118,7 +148,7 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `sellers` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `area_code` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `area_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `otp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -134,9 +164,9 @@ CREATE TABLE `sellers` (
 --
 
 INSERT INTO `sellers` (`id`, `name`, `area_code`, `phone`, `otp`, `email`, `password`, `address`, `admin_id`, `created_at`, `updated_at`) VALUES
-(6, 'Jon Doe', '22', '01857126452', '8251', 'emai4l@gmail.com', '202cb962ac59075b964b07152d234b70', 'Uttara, Dhaka, Bangladesh', 1, '2021-01-10 23:38:58', '2021-01-11 00:57:33'),
-(8, 'Kamal', '789', '01857454544', NULL, 'kamal@gmail.com', '202cb962ac59075b964b07152d234b70', 'Dhaka, Mymensing, Babri gram', 1, '2021-01-12 21:46:06', NULL),
-(9, 'Hamza', '147', '02857126452', NULL, 'test@gmail.com', '202cb962ac59075b964b07152d234b70', 'uttara, dhaka', 1, '2021-01-12 21:47:37', NULL);
+(1, 'Demoa2z', '1857', '126452', NULL, 'test@gmail.com', '202cb962ac59075b964b07152d234b70', 'House-39,Shataish', 1, '2021-01-17 04:03:10', '2021-01-20 19:31:05'),
+(2, 'Demoa2z', '1857', '126451111', NULL, '01857126452@gmail.com', '202cb962ac59075b964b07152d234b70', 'House-39,Shataish', 1, '2021-01-18 12:39:59', NULL),
+(3, 'Demoa2z 33', '1857', '01857126452', NULL, NULL, '698d51a19d8a121ce581499d7b701668', 'House-39,Shataish', 1, '2021-01-18 12:42:36', '2021-01-20 12:31:06');
 
 -- --------------------------------------------------------
 
@@ -163,6 +193,12 @@ CREATE TABLE `users` (
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -210,13 +246,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -228,13 +270,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
