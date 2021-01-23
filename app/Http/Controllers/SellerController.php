@@ -532,6 +532,14 @@ class SellerController extends Controller
 
     }else{
 
+        // Check Card Number is exist or not
+        $is_cart_exist = DB::table('carts')->where('cart_number',$card_number)->first();
+
+        if(!$is_cart_exist){
+            Session::flash('message', 'Entered Cart Number is not Valid!'); 
+            return  redirect()->back();
+        }
+
         $customers =  DB::table('customers')->insert(
             [
                 'card_number'=> $card_number,
@@ -543,6 +551,8 @@ class SellerController extends Controller
                 'created_at' => Carbon::now(),
             ]
         );
+
+
         // Check Seller Created Successfully or not
         if($customers){
 
