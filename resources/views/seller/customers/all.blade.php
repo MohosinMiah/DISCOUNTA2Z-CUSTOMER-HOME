@@ -40,10 +40,9 @@
               <thead>
                   <tr>
                       <th>ID</th>
+                      <th>Card NO</th>
                       <th>Name</th>
-                      <th>Area Code</th>
                       <th>Phone</th>
-                      <th>Email </th>
                       <th> Action </th>
                   </tr>
               </thead>
@@ -53,9 +52,8 @@
                 
                   <tr>
                       <td>{{$customer->id}}</td>
+                      <td>{{$customer->card_number}}</td>
                       <td>{{$customer->name}}</td>
-                      <td>{{$customer->phone}}</td>
-                      <td>{{$customer->phone}}</td>
                       <td>{{$customer->phone}}</td>
                       <td>
                         <div class="action">
@@ -77,9 +75,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Area Code</th>
+                    <th>Card NO</th>
                     <th>Phone</th>
-                    <th>Email </th>
                     <th> Action </th>
                 </tr>
               </tfoot>
