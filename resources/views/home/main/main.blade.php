@@ -7,7 +7,7 @@
   {{-- Style Files *************************    --}}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+  <link rel="stylesheet" href="{{ URL::asset('assets/css/main.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('/css/global.css') }}">
   
   
@@ -15,54 +15,73 @@
 </head>
 <body>
 
-  {{-- Header Section  --}}
-<div class="jumbotron text-center top-header">
-  <h1>DISCOUNT A2Z</h1>
-  <p>Here There EveryWhere</p> 
+  <!-- Header -->
+    <header id="header">
+      <div class="inner">
+        <a href="/" class="logo" > <img src="{{  URL::asset('/images/discounta2z-logo.png') }}" alt="Discount  A2z "> </a>
+        <nav id="nav">
+          <a href="https://www.discounta2z.com/" target="_blank">Visit Website</a>
+     
+        </nav>
+        <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+      </div>
+    </header>
 
-  <div class="logo">
-    <a href="/"> <img src="{{url('/images/discounta2z-logo.png')}}" alt="Discount Logo"> </a>
-  </div>
+  <!-- Banner -->
+    <section id="banner">
+      <div class="inner">
+        <header>
+          <h1>Welcome to Discount A2Z</h1>
+        </header>
 
-  <div class="notice">
-    <h3><marquee>Welcome to DISCOUNT A2Z. Admin says "Next 20 days we fixed a target that we increase our consumer number upto 2000."</marquee></h3>
+        <div class="flex ">
 
-  </div>
+          <div>
+            <i class="fa fa-user" style="font-size:55px;color:green" data-toggle="tooltip" data-placement="top" title="Admin Login"></i>
+            <a href="{{ route('admin.loginadmin_login') }}"> <h3>Admin Login</h3> </a>
+            <p>Login for Manage Sellers and Consumers</p>
+          </div>
 
-</div>
-  
-
-
-{{-- Main  Section  --}}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6">
-     <a href="{{ route('admin.loginadmin_login') }}"> <h3> <i class="fa fa-user" style="font-size:55px;color:green" data-toggle="tooltip" data-placement="top" title="Admin Login"></i></h3></a>
-      <p>Admin Dashboard Access <a href="{{ route('admin.loginadmin_login') }}">Click Here .. <i class="fa fa-dashboard" style="font-size:28px;color:red"></i></a> </p>
-      <p><strong>Login for Manage Sellers and Consumers</strong></p>
-    </div>
-
-    <div class="col-sm-6">
-      <a href="{{ route('admin.loginadmin_login') }}"> <h3> <i class="fa fa-user" style="font-size:55px" data-toggle="tooltip" data-placement="top" title="Sellers Login"></i></h3></a>
-       <p>Seller Dashboard Access <a href="{{ route('seller.loginseller_login') }}">Click Here .. <i class="fa fa-dashboard" style="font-size:28px;color:red"></i></a> </p>
-       <p><strong>Login for Manage Consumers or Customers</strong></p>
-     </div>
- 
- 
-  </div>
-</div>
+          <div>
+            <i class="fa fa-user" style="font-size:55px" data-toggle="tooltip" data-placement="top" title="Sellers Login"></i>
+            <a href="{{ route('seller.loginseller_login') }}"> <h3>Seller Login</h3> </a>
+            <p>Login for Manage Consumers or Customers</p>
+          </div>
 
 
-{{-- Footer Section  --}}
-<div class="container-fluid footer">
-  <div class="row">
-    <div class="col-sm-12 col-md-12">
+        </div>
 
-      <p><strong>All Right Preserved &copy;<a href="#" class="copy_right_link"> DISCOUNT A2Z </a></strong></p>
-    </div>
+      </div>
+    </section>
 
-  </div>
-</div>
+
+  <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+
+        <h3>Contact With Us</h3>
+         <h3><a href="tel:+01857126452"> <i class="fa fa-phone" aria-hidden="true"> </i> 
+          01857126452 </a>
+         </h3>
+
+         <h3> <a href="mailto:query@discounta2z.com"><i class="fa fa-envelope" aria-hidden="true"></i>
+          query@discounta2z.com</a> 
+         </h3>
+
+        <div class="copyright">
+          &copy; DiscountA2Z All Right Preserved  <a href="https://www.discounta2z.com/"></a>
+        </div>
+
+      </div>
+    </footer>
+
+
+
+  <!-- Scripts -->
+    <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/skel.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/util.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/main.js') }}"></script>
 
 
   {{-- Javascript  Files *************************    --}}

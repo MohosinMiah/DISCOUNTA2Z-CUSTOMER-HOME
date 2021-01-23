@@ -45,8 +45,9 @@
             <form method="POST" action="{{ route('seller.customer_create_storeseller_seller_create_store')}}">
                 @csrf
                 <div class="form-group">
-                    <label for="card_number">Card Number *</label>
-                    <input type="text" class="form-control" id="card_number" name="card_number" placeholder="Card Number" required>
+                    <label for="card_number">Card Number (<small><b>8 Digits</b></small>)*</label>
+
+                    <input type="text" pattern=".{8}" class="form-control" id="card_number" name="card_number" placeholder="Card Number" oninput="check(this)" required>
                   </div>
 
                   <div class="form-group">
@@ -56,7 +57,7 @@
 
                   <div class="form-group" id="card-number-field">
                     <label for="phone">Phone * </label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number" required>
+                    <input type="tel" pattern=".{11}" class="form-control" id="phone" name="phone" placeholder="Phone Number" oninput="check(this)" required>
                 </div>
 
                <div class="form-group">

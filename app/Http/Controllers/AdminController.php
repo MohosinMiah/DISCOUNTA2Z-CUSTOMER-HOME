@@ -796,7 +796,7 @@ class AdminController extends Controller
 
         Session::flush();
 
-        return redirect()->route('admin.loginadmin_login');
+        return redirect()->route('home');
 
      
  }

@@ -1012,7 +1012,7 @@ public function logout(){
 
    Session::flush();
 
-   return redirect()->route('admin.loginadmin_login');
+   return redirect()->route('home');
 
 
 }

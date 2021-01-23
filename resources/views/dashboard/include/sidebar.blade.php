@@ -85,7 +85,12 @@
                 </a>
                 <div id="collapseCustomers" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+
+                                 {{-- Check Seller or Not  --}}
+                                 @if(Session::get('seller_is_login'))
                         <a class="collapse-item" href="{{ route('seller.customer_createseller_seller_create') }}">Add New</a>
+                                 @endif
+
                         <a class="collapse-item" href="{{ route('seller.customer_allseller_seller_all') }}">All Customer</a>
                     </div>
                 </div>
